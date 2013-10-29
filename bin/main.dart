@@ -24,13 +24,8 @@ main() {
 }
 
 void sayHi(HttpRequest request) {
-  var resp = JSON.encode({
-    'Dart on Heroku': true,
-    'Dart version': Platform.version,
-    'Buildpack URL': 'https://github.com/igrigorik/heroku-buildpack-dart',
-    'Environment': Platform.environment}
-  );
+  var message = "Powered by Deis";
   request.response..headers.set(HttpHeaders.CONTENT_TYPE, 'application/json')
-                  ..write(resp)
+                  ..write(message)
                   ..close();
 }
