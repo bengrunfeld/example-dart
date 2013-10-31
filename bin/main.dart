@@ -24,7 +24,13 @@ main() {
 }
 
 void sayHi(HttpRequest request) {
-  var message = "Powered by Deis";
+  var powered_by = Platform.environment['POWERED_BY'];
+  var message;
+  if (powered_by == null) {
+    message = "Powered by Deis";
+  } else {
+    message = "Powered by $powered_by"; 
+  }
   request.response..headers.set(HttpHeaders.CONTENT_TYPE, 'application/json')
                   ..write(message)
                   ..close();

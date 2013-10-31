@@ -1,4 +1,4 @@
-name: dart_on_heroku_demo
+name: dart_on_deis_demo
 dependencies:
   http_server: any
   route: any
