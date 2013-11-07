@@ -85,14 +85,13 @@ If an ID is not provided, one will be auto-generated for you.
 Use `git push deis master` to deploy your application.
 
 	$ git push deis master
-	Counting objects: 65, done.
+	Counting objects: 491, done.
 	Delta compression using up to 4 threads.
-	Compressing objects: 100% (40/40), done.
-	Writing objects: 100% (65/65), 15.95 KiB, done.
-	Total 65 (delta 19), reused 61 (delta 18)
-	       Python app detected
-	-----> No runtime.txt provided; assuming python-2.7.4.
-	-----> Preparing Python runtime (python-2.7.4)
+	Compressing objects: 100% (461/461), done.
+	Writing objects: 100% (491/491), 9.31 MiB | 90 KiB/s, done.
+	Total 491 (delta 28), reused 0 (delta 0)
+	       Dart app detected
+	-----> Welcome, this machine is: Linux e3a4efec79da 3.8.0-32-generic #47~precise1-Ubuntu SMP Wed Oct 2 16:19:35 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
 
 Once your application has been deployed, use `deis open` to view it in a browser. To find out more info about your application, use `deis info`.
 
@@ -106,15 +105,15 @@ To scale your application's [Docker](http://docker.io) containers, use `deis sca
 	
 	=== <appName> Containers
 	
-	--- web: `gunicorn -b 0.0.0.0:$PORT app:app`
-	web.1 up 2013-10-25T20:00:11.741Z (pythonFormation-runtime-1)
-	web.2 up 2013-10-25T20:04:37.133Z (pythonFormation-runtime-1)
-	web.3 up 2013-10-25T20:04:37.148Z (pythonFormation-runtime-1)
-	web.4 up 2013-10-25T20:04:37.162Z (pythonFormation-runtime-1)
-	web.5 up 2013-10-25T20:04:37.177Z (pythonFormation-runtime-1)
-	web.6 up 2013-10-25T20:04:37.194Z (pythonFormation-runtime-1)
-	web.7 up 2013-10-25T20:04:37.212Z (pythonFormation-runtime-1)
-	web.8 up 2013-10-25T20:04:37.231Z (pythonFormation-runtime-1)
+	--- web: `./dart-sdk/bin/dart bin/main.dart`
+	web.1 up 2013-11-04T23:16:59.022Z (dev-runtime-1)
+	web.2 up 2013-11-04T23:19:35.053Z (dev-runtime-1)
+	web.3 up 2013-11-04T23:19:35.068Z (dev-runtime-1)
+	web.4 up 2013-11-04T23:19:35.083Z (dev-runtime-1)
+	web.5 up 2013-11-04T23:19:35.099Z (dev-runtime-1)
+	web.6 up 2013-11-04T23:19:35.116Z (dev-runtime-1)
+	web.7 up 2013-11-04T23:19:35.135Z (dev-runtime-1)
+	web.8 up 2013-11-04T23:19:35.155Z (dev-runtime-1)
 
 
 ## Configure your Application
@@ -123,36 +122,37 @@ Deis applications are configured using environment variables. The example applic
 
 	$ curl -s http://yourapp.yourformation.com
 	Powered by Deis
-	$ deis config:set POWERED_BY=Python
+	$ deis config:set POWERED_BY=Dart
 	=== <appName>
-	POWERED_BY: Python
+	POWERED_BY: Dart
 	$ curl -s http://yourapp.yourformation.com
-	Powered by Python
+	Powered by Dart
 
 `deis config:set` is also how you connect your application to backing services like databases, queues and caches. You can use `deis run` to execute one-off commands against your application for things like database administration, initial application setup and inspecting your container environment.
 
 	$ deis run ls -la
 	total 56
-	drwxr-xr-x  4 root root 4096 Oct 25 20:03 .
-	drwxr-xr-x 57 root root 4096 Oct 25 20:05 ..
-	-rw-r--r--  1 root root  237 Oct 25 19:59 .gitignore
-	drwxr-xr-x  3 root root 4096 Oct 25 19:59 .heroku
-	drwxr-xr-x  2 root root 4096 Oct 25 19:59 .profile.d
-	-rw-r--r--  1 root root   18 Oct 25 19:59 .release
-	-rw-r--r--  1 root root  553 Oct 25 19:59 LICENSE
-	-rw-r--r--  1 root root   39 Oct 25 19:59 Procfile
-	-rw-r--r--  1 root root 7829 Oct 25 19:59 README.md
-	-rw-r--r--  1 root root  330 Oct 25 19:59 app.py
-	-rw-r--r--  1 root root  602 Oct 25 20:03 app.pyc
-	-rw-r--r--  1 root root   40 Oct 25 19:59 requirements.txt
-	-rw-r--r--  1 root root   13 Oct 25 19:59 runtime.txt
+	drwxr-xr-x  7 root root 4096 Nov  4 23:16 .
+	drwxr-xr-x 57 root root 4096 Nov  4 23:19 ..
+	-rw-r--r--  1 root root   41 Nov  4 23:16 .gitignore
+	drwxr-xr-x  2 root root 4096 Nov  4 23:16 .profile.d
+	-rw-r--r--  1 root root   63 Nov  4 23:16 .release
+	-rw-r--r--  1 root root   39 Nov  4 23:16 Procfile
+	-rw-r--r--  1 root root 7109 Nov  4 23:16 README.md
+	drwxr-xr-x  2 root root 4096 Nov  4 23:16 bin
+	drwxr-xr-x  6 root root 4096 Nov  4 23:16 dart-sdk
+	drwxr-xr-x  2 root root 4096 Nov  4 23:16 packages
+	-rw-r--r--  1 root root  714 Nov  4 23:16 pubspec.lock
+	-rw-r--r--  1 root root   81 Nov  4 23:16 pubspec.yaml
+	drwxr-xr-x  3 root root 4096 Nov  4 23:16 tmp
 
 ## Troubleshoot your Application
 
 To view your application's log output, including any errors or stack traces, use `deis logs`.
 
     $ deis logs
-    <show output>
+	Nov  4 23:17:12 ip-172-31-3-111 breezy-aqualung[web.1]: import 'package:http_server/http_server.dart';
+	Nov  4 23:17:12 ip-172-31-3-111 breezy-aqualung[web.1]: 
 
 ## Additional Resources
 
